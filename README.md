@@ -21,14 +21,14 @@ docker run -it --rm -v $PWD:/src -p 1313:1313 zhaowde/hugo-docker:latest server 
 
 ## To update
 
-1. Go to https://github.com/gohugoio/hugo/tags, find the newest version. e.g. `v0.101.0`
+1. Go to https://github.com/gohugoio/hugo/tags, find the newest version. e.g. `v0.108.0`
 2. Edit `Dockerfile`, update the following line to match the newest version above (without the prefix `v`):
    ```
-   ENV HUGO_VERSION=0.101.0
+   ENV HUGO_VERSION=0.108.0
    ```
 3. Build and public the image:
    ```bash
-   docker build . -t zhaowde/hugo-docker:0.101.0 -t zhaowde/hugo-docker:latest
-   docker push zhaowde/hugo-docker:0.101.0
+   docker build . -t zhaowde/hugo-docker:0.108.0 -t zhaowde/hugo-docker:latest
+   docker push zhaowde/hugo-docker:0.108.0
    docker push zhaowde/hugo-docker:latest
    ```

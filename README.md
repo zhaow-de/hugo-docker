@@ -28,7 +28,10 @@ docker run -it --rm -v $PWD:/src -p 1313:1313 zhaowde/hugo-docker:latest server 
    ```
 3. Build and public the image:
    ```bash
-   docker build . -t zhaowde/hugo-docker:0.110.0 -t zhaowde/hugo-docker:latest
-   docker push zhaowde/hugo-docker:0.110.0
-   docker push zhaowde/hugo-docker:latest
+   docker buildx build --push --allow security.insecure --push --platform linux/amd64,linux/arm64 --builder rcplus \
+      --tag zhaowde/hugo-docker:0.110.0 --tag zhaowde/hugo-docker:latest --progress plain .
+   ```
+4. In case (3) complains "ERROR: no builder "rcplus" found":
+   ```bash
+   docker buildx create --bootstrap --name rcplus --driver docker-container --platform linux/amd64,linux/arm64 --use --buildkitd-flags '--allow-insecure-entitlement security.insecure'
    ```

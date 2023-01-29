@@ -5,15 +5,16 @@ LABEL maintainer="Zhao Wang <zhaow.km@gmail.com>"
 
 ENV HUGO_VERSION=0.110.0
 
-RUN wget -O - https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz | tar -xz -C /tmp \
+COPY get_platform.sh .
+
+RUN set -ex \
+    && PLATFORM=$(./get_platform.sh) \
+    && wget -O - https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${PLATFORM}.tar.gz | tar -xz -C /tmp \
     && mkdir -p /usr/local/sbin \
     && mv /tmp/hugo /usr/local/sbin/hugo \
-    && rm -rf /tmp/${HUGO_ID}_linux_amd64 \
-    && rm -rf /tmp/LICENSE.md \
-    && rm -rf /tmp/README.md \
+    && rm -rf /tmp/* \
     && apk upgrade \
-    && apk add --no-cache --update git asciidoctor libc6-compat libstdc++ \
-    && apk add --no-cache --update ca-certificates
+    && apk add --no-cache --update asciidoctor ca-certificates git libc6-compat libstdc++
 
 VOLUME /src
 

@@ -3,7 +3,7 @@ FROM alpine:latest
 LABEL description="Docker container for building static sites with the Hugo static site generator."
 LABEL maintainer="Zhao Wang <zhaow.km@gmail.com>"
 
-ENV HUGO_VERSION=0.110.0
+ENV HUGO_VERSION=0.111.3
 
 COPY get_platform.sh .
 
